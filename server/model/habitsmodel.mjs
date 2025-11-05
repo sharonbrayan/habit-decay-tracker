@@ -9,16 +9,21 @@ const habitSchema=mongoose.Schema(
         },
         lastCompletedDate:{
             type:Date,
-            default:Date.now
+            default:0
         },
         completionTimeStamps:{
             type:[Date],
-            default:[Date.now()]
+            default:[]
+        },
+        user:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User',  
+            required:true,
+            index:true
         }
     },
     {
         timestamps:true
     }
 );
-
-export const HabitModel=mongoose.model('Habit',habitSchema);
+export const HabitModel=mongoose.models.habits ||mongoose.model('Habit',habitSchema);
