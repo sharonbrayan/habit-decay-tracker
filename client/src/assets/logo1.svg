@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="titleDesc2">
+  <title id="titleDesc2">Clipboard with green checkmark</title>
+  <rect x="10" y="14" width="44" height="44" rx="4" ry="4" fill="#ffffff" stroke="#e6e6e6" stroke-width="1"/>
+  <!-- top clip -->
+  <rect x="22" y="6" width="20" height="10" rx="2" ry="2" fill="#34C759"/>
+  <!-- subtle page lines -->
+  <rect x="16" y="22" width="32" height="2" rx="1" fill="#f2f2f2"/>
+  <rect x="16" y="28" width="32" height="2" rx="1" fill="#f2f2f2"/>
+  <rect x="16" y="34" width="22" height="2" rx="1" fill="#f2f2f2"/>
+  <!-- green checkmark -->
+  <path d="M20.5 36.5 L28.5 44.5 L44 28.5" fill="none" stroke="#34C759" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
