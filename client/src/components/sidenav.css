@@ -1,0 +1,15 @@
+ .sidenav{
+    height: 87vh;
+    margin-top: 10px;
+    border: 1px solid green
+ }
+ .profile-image{
+    height: 150px;
+    width:150px;
+    border-radius: 50%;
+ }
+ .close-btn{
+    height: 45px;
+    width:45px;
+    border-radius: 50%;
+ }

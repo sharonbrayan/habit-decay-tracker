@@ -1,17 +1,46 @@
+.form-container{
+    height: 70vh;
+}
 form{
-    width: 100vw;
+    width: 35vw;
+    margin: 50px auto;
 }
 .input-box{
     position: relative;
-    width: 65%;
-    height:50px;
+    height:60px;
+    border: 2px solid gray;
+}
+ .input-box:focus-within{
+    border: 2px solid green;
+}
+ .input-box:focus-within label{
+    color: green
 }
 .input-box>input{
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    height: 100%;
+    
 }
 .input-box >label{
     position: absolute;
     top: 0;
     left: 0;
+}
+input[type="text"],input[type="text"]:active, input[type="text"]:focus,input[type="password"],input[type="password"]:focus,input[type="password"]:active{
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+input:-webkit-autofill {
+  background-color: white !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
+@media (max-width:767px) {
+    form{
+        width: 70vw;
+    }
 }

@@ -5,7 +5,7 @@ const SignUp = () => {
   return (
     <div>
       <Navbar/>
-      <AuthForm/>
+      <AuthForm auth={"signup"}/>
     </div>
   )
 }

@@ -1,8 +1,12 @@
 import React from 'react'
-
+import Navbar from '../components/Navbar';
+import AuthForm from '../components/AuthForm';
 const Login = () => {
   return (
-    <div>Login</div>
+    <div>
+      <Navbar/>
+      <AuthForm auth={"login"}/>
+    </div>
   )
 }
 

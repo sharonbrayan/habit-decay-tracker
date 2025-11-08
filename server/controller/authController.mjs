@@ -11,7 +11,7 @@ export const register = async (req, res) => {
     try {
         const existingUser = await userModel.findOne({ name });
         if (existingUser) {
-            return res.status(404).json({ success: false, message: "user already exists" });
+            return res.status(409).json({ success: false, message: "user already exists" });
         }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -19,8 +19,8 @@ export const register = async (req, res) => {
         await user.save();
         const token = jwt.sign({ id: user._id }, "secret", { expiresIn: '7d' });
         res.cookie('token', token, {
-            httoOnly: true,
-            sameSite: 'strict',
+            httpOnly: true,
+            sameSite: 'lax',
             maxAge: 1000 * 60 * 60 * 24 * 7,
             secure: false
         })
@@ -30,7 +30,7 @@ export const register = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        return res.status(404).json({ success: false, message: error.message,ho:"hoo" });
+        return res.status(404).json({ success: false, message: error.message });
     }
 }
 
@@ -51,24 +51,33 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, "secret", { expiresIn: '7d' });
         res.cookie('token', token, {
-            httoOnly: true,
-            sameSite: 'strict',
+            httpOnly: true,
+            sameSite: 'lax',
             maxAge: 1000 * 60 * 60 * 24 * 7,
             secure: false
         })
-        return res.json({ success: true });
+        return res.json({ success: true , message:"Logged In"});
     } catch (error) {
         return res.status(404).json({ success: false, message: error.message });
     }
 }
 
 
+export const getUser=async (req,res)=>{
+    const {id}=req;
+    const user=await userModel.findById(id);
+    if(!user){
+        return res.json({success:false, message:'user not found'})
+    }
+    return res.json({success:true,user})
+}
+
 export const logout = async (req, res) => {
     try {
         res.clearCookie('token', {
             httpOnly: true,
             secure: false,
-            sameSite: 'strict',
+            sameSite: 'lax',
         })
         return res.json({ success: true, message: "logged out successfully" })
     } catch (error) {
@@ -90,7 +99,7 @@ export const changePassword = async (req, res) => {
         }
         const validPassword = await bcrypt.compare(oldPassword, user.password);
         if (!validPassword) {
-            return res.json({ success: false, message: "password doesn't match" });
+            return res.json({ success: false, message: "password doesn't match to your old password" });
         }
         const salt=await bcrypt.genSalt(10);
         const newHashedPassword=await bcrypt.hash(newPassword,salt);
