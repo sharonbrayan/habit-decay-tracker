@@ -1,15 +1,69 @@
- .sidenav{
-    height: 87vh;
-    margin-top: 10px;
-    border: 1px solid green
+ .sidenav {
+    height: calc(100vh - 74px);
+    padding: 20% 0;
  }
- .profile-image{
-    height: 150px;
-    width:150px;
+.profile{
+   cursor: pointer;
+}
+ .profile-image-1 {
+    height: 100px;
+    width: 100px;
     border-radius: 50%;
+    background-image: url('../assets/img-1.png');
+    background-size: cover;
+    background-position: center;
  }
- .close-btn{
+
+ .profile-image-2 {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-image: url('../assets/img-1.png');
+    background-size: cover;
+    background-position: center;
+ }
+
+ .profile-image-3 {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-image: url('../assets/img-1.png');
+    background-size: cover;
+    background-position: center;
+ }
+
+ .profile-image-4 {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-image: url('../assets/img-1.png');
+    background-size: cover;
+    background-position: center;
+ }
+
+ .profile-image-5 {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%; 
+    background-image: url('../assets/img-1.png');
+    background-size: cover;
+    background-position: center;
+ }
+
+ .active{
+   border-radius: 10px;
+   background-color: rgb(30, 180, 30);
+   padding: 0.5rem 2rem;
+   
+ }
+ .inactive{
+   padding: 0.5rem;
+   cursor: pointer;
+      padding: 0.5rem 2rem;
+
+ }
+ .close-btn {
     height: 45px;
-    width:45px;
+    width: 45px;
     border-radius: 50%;
  }

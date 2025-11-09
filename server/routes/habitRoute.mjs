@@ -6,4 +6,4 @@ export const habitRouter=Router();
 
 habitRouter.post('/addhabit',userAuth, addHabit);
 habitRouter.get('/gethabits',userAuth, getHabits);
-habitRouter.patch('/updatetimestamp',userAuth,updtaeCompletedTimeStamp);
+habitRouter.patch('/updatetimestamp',userAuth,updtaeCompletedTimeStamp); 

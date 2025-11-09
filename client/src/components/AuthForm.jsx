@@ -21,6 +21,8 @@ const AuthForm = ({ auth }) => {
       } catch (error) {
         if (error.response.data.message) {
           toast.error(error.response.data.message)
+        }else{
+          console.log(error);
         }
       }
     } else if (auth === 'login') {

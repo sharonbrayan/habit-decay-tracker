@@ -9,7 +9,7 @@ const Navbar = ({ showlogout }) => {
   const location = useLocation();
   const showAuthButtons = ['/'].includes(location.pathname);
   const navigate = useNavigate();
-  const logout = async () => {
+  const logout = async () => { 
     try {
       const {data}=await axios.post('http://localhost:4000/api/logout',{withCredentials:true});
       if(data.success){
@@ -25,7 +25,7 @@ const Navbar = ({ showlogout }) => {
     }
   }
   return (
-    <div>
+    <div style={{height:"74px"}}>
       <Container fluid className='pt-4 px-lg-5 px-3'>
         <Row className='d-flex justify-content-end'>
           <Col className='d-flex align-items-center gap-2' style={{ cursor: "pointer" }}>

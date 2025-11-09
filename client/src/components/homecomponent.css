@@ -1,0 +1,42 @@
+.home-component{
+    background-color: rgb(255, 253, 157);
+    height: calc(100vh - 74px);
+    width: 100%;
+    overflow-x: scroll;
+    border-radius: 10px;
+    padding: 5%;
+}
+.input-box{
+    position: relative;
+    height:60px;
+    border: 2px solid gray;
+}
+ .input-box:focus-within{
+    border: 2px solid green;
+}
+ .input-box:focus-within label{
+    color: green
+}
+.input-box>input{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
+}
+.input-box >label{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+input[type="text"],input[type="text"]:active, input[type="text"]:focus{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+input:-webkit-autofill {
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: black !important;
+}
