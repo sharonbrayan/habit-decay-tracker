@@ -1,7 +1,7 @@
 .form-container{
     height: 70vh;
 }
-form{
+.form{
     width: 35vw;
     margin: 50px auto;
 }
@@ -27,7 +27,7 @@ form{
     top: 0;
     left: 0;
 }
-input[type="text"],input[type="text"]:active, input[type="text"]:focus,input[type="password"],input[type="password"]:focus,input[type="password"]:active{
+.input[type="text"],.input[type="text"]:active, .input[type="text"]:focus,.input[type="password"],.input[type="password"]:focus,.input[type="password"]:active{
     border: none;
     outline: none;
     padding-left: 10px;

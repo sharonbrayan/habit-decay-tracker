@@ -10,9 +10,9 @@ const Sidenav = ({ userdetails }) => {
     <div className='sidenav'>
       <div className="profile d-flex flex-column align-items-center">
         <div className='profile-image-1'></div>
-        <span className='text-capitalize fw-semibold fs-5'>{userdetails.name}</span>
+        <span className='text-capitalize fw-bold fs-4'>{userdetails.name}</span>
       </div>
-      <ul className='list-unstyled'>
+      <ul className='list-unstyled pt-5'>
         <li className={pathName==='/home'? 'active':'inactive'} onClick={()=>{pathName!=='/home'&&navigate('/home')}}>
           <Link to={'/home'} className='text-decoration-none text-black'><i className="fa fa-home" aria-hidden="true"></i> Home</Link>
         </li>

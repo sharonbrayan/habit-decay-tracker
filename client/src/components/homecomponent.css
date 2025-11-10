@@ -1,12 +1,19 @@
 .home-component{
-    background-color: rgb(255, 253, 157);
+    border-top:  0.2px solid rgb(235, 232, 232);
+    border-left:  0.2px solid rgb(235, 232, 232);
     height: calc(100vh - 74px);
     width: 100%;
     overflow-x: scroll;
     border-radius: 10px;
     padding: 5%;
 }
-.input-box{
+input[type="text"]{
+    width: 75%;
+}
+input::placeholder{
+    font-size: small;
+}
+/* .input-box{
     position: relative;
     height:60px;
     border: 2px solid gray;
@@ -39,4 +46,4 @@ input:-webkit-autofill {
   background-color: transparent !important;
   -webkit-box-shadow: 0 0 0 30px white inset !important;
   -webkit-text-fill-color: black !important;
-}
+} */

@@ -44,9 +44,9 @@ const AuthForm = ({ auth }) => {
   return (
     <div className='form-container d-flex flex-column align-items-center justify-content-center'>
       <span className='mx-auto fs-1 fw-medium'>{auth === 'login' ? "Log In" : "Start Your Journey"}</span>
-      <form action="" onSubmit={handleSubmit(onsubmit)} className='d-flex flex-column'>
+      <form action="" onSubmit={handleSubmit(onsubmit)} className='d-flex flex-column form'>
         <div className="input-box" tabIndex="0">
-          <input className='border-0' type="text" name="" id="name"
+          <input className='border-0 input' type="text" name="" id="name"
             {...register("name",
               {
                 required: { value: true, message: "enter your name" },
