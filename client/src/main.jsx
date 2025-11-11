@@ -4,11 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
+import { AppContextProvider } from './context/appContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
- 
-<BrowserRouter>
-    <App />
-</BrowserRouter> 
+
+    <BrowserRouter>
+        <AppContextProvider>
+            <App />
+        </AppContextProvider>
+    </BrowserRouter>
 )

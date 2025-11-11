@@ -1,26 +1,13 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../components/Navbar';
 import { Col, Container, Row } from 'react-bootstrap';
 import Sidenav from '../components/Sidenav';
 import HomeComponent from '../components/HomeComponent';
+import { AppContext } from '../context/appContext';
 
 const Home = () => {
-    const [userDetails, setuserDetails] = useState([]);
-    useEffect(() => {
-        (async () => {
-            try {
-                const { data } = await axios.get('http://localhost:4000/api/userdata',{withCredentials:true});
-                if (data.success) {
-                     setuserDetails(data.user);
-                } else {
-                    console.log(data.message);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        })();
-    }, [])
+   const userDetails=useContext(AppContext);
 
     return (
         <div className='vh-100'>
@@ -28,7 +15,7 @@ const Home = () => {
             <Container fluid>
                 <Row>
                     <Col xl={3} md={12} className='ps-0'><Sidenav userdetails={userDetails}/></Col>
-                    <Col xs={9}><HomeComponent userdetails={userDetails}/></Col>
+                    <Col xs={9}><HomeComponent/></Col>
                 </Row>
             </Container>
         </div>

@@ -62,7 +62,7 @@ const AuthForm = ({ auth }) => {
         {errors.name && <p className='text-danger'>&#9432; {errors.name.message}</p>}
         <br />
         <div className="input-box" tabIndex={0}>
-          <input className='border-0' type="password" name="" id="password"
+          <input className='border-0 input' type="password" name="" id="password"
             {...register("password",
               {
                 required: { value: true, message: "enter password" },

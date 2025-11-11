@@ -25,8 +25,8 @@ const Navbar = ({ showlogout }) => {
     }
   }
   return (
-    <div style={{height:"74px"}}>
-      <Container fluid className='pt-3 px-lg-5 px-3'>
+    <div style={{height:"74px"}} className=''>
+      <Container fluid className='pt-3 px-lg-5 px-3 '>
         <Row className='d-flex justify-content-end'>
           <Col className='d-flex align-items-center gap-2' style={{ cursor: "pointer" }}>
             <img src={logo} alt="" height={50} width={50} onClick={() => navigate('/')} />

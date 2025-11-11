@@ -56,20 +56,20 @@ export const login = async (req, res) => {
             maxAge: 1000 * 60 * 60 * 24 * 7,
             secure: false
         })
-        return res.json({ success: true , message:"Logged In"});
+        return res.json({ success: true, message: "Logged In" });
     } catch (error) {
         return res.status(404).json({ success: false, message: error.message });
     }
 }
 
 
-export const getUser=async (req,res)=>{
-    const {id}=req;
-    const user=await userModel.findById(id);
-    if(!user){
-        return res.json({success:false, message:'user not found'})
+export const getUser = async (req, res) => {
+    const { id } = req;
+    const user = await userModel.findById(id);
+    if (!user) {
+        return res.json({ success: false, message: 'user not found' })
     }
-    return res.json({success:true,user})
+    return res.json({ success: true, user })
 }
 
 export const logout = async (req, res) => {
@@ -101,30 +101,33 @@ export const changePassword = async (req, res) => {
         if (!validPassword) {
             return res.json({ success: false, message: "password doesn't match to your old password" });
         }
-        const salt=await bcrypt.genSalt(10);
-        const newHashedPassword=await bcrypt.hash(newPassword,salt);
-        user.password=newHashedPassword;
+        const salt = await bcrypt.genSalt(10);
+        const newHashedPassword = await bcrypt.hash(newPassword, salt);
+        user.password = newHashedPassword;
         await user.save();
-        return res.json({success:true});
+        return res.json({ success: true });
     } catch (error) {
         return res.json({ success: false, message: error.message });
     }
 }
 
-export const changeUsername=async (req,res)=>{
-    const {newName}=req.body;
-    const {id}=req;
-    if (!newName || typeof newName!=='string') {
+export const changeUsername = async (req, res) => {
+    const { newName } = req.body;
+    const { id } = req;
+    if (!newName || typeof newName !== 'string') {
         return res.status(404).json({ success: false, message: "please enter valid username" });
     }
     try {
-        const user=await userModel.findById(id);
+        const user = await userModel.findById(id);
         if (!user) {
             return res.json({ success: false, message: "user not found" });
+        } else if (user.name === newName) {
+            return res.json({ success: false, message: "username is same" });
         }
-        user.name=newName;
+
+        user.name = newName;
         await user.save();
-    return res.json({success:true})
+        return res.json({ success: true, message: 'username changed successfully' })
     } catch (error) {
         return res.json({ success: false, message: error.message });
     }

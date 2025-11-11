@@ -1,7 +1,9 @@
  .sidenav {
     height: calc(100vh - 74px);
     padding: 20% 10%;
-    background-color: #faf8f8;
+    background-color: #ffffff;
+    border: 2px solid honeydew;
+    border-radius: 10px;
  }
 .profile{
    cursor: pointer;

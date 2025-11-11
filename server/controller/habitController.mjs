@@ -59,3 +59,25 @@ export const updtaeCompletedTimeStamp=async (req,res)=>{
         return res.status(500).json({ status: false, message: error.message });
     }
 }
+
+export const deletehabit=async(req,res)=>{
+    const {name}=req.body;
+    const {id}=req;
+    if (!name || typeof name !== 'string') {
+        return res.status(404).json({ status: false, message: "not valid habit" });
+    }
+    if ( !id) {
+        return res.status(404).json({ status: false, message: "please enter valid id" });
+    }
+    try {
+        const deletedItem=await HabitModel.deleteOne({name,user:id});
+        console.log(deletedItem);
+        if(deletedItem){
+            return res.json({success:true,message:'deleted successfully'});
+        }else{
+            return res.status(404).json({ status: false, message: "habit not found" });
+        }
+    } catch (error) {
+        return res.status(500).json({ status: false, message: error.message });
+    }
+}
