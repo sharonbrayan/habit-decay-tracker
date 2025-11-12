@@ -1,0 +1,8 @@
+.activities{
+    border-top:  2px solid honeydew;
+    border-left:  2px solid honeydew;
+    height: calc(100vh - 74px);
+    border-radius: 10px;
+    padding: 5%;
+    background-color: #ffffff;
+}

@@ -6,10 +6,27 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const ProfileComponent = ({ userdetails }) => {
-    const { register, reset, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm();
+   const {
+    register: registerName,
+    reset: resetName,
+    handleSubmit: handleSubmitName,
+    formState: { errors: errorsName, isSubmitting: isSubmittingName },
+  } = useForm({ defaultValues: { name: userdetails.name ?? "" } });
+
+  // separate form for password
+  const {
+    register: registerPass,
+    reset: resetPass,
+    handleSubmit: handleSubmitPass,
+    watch: watchPass,
+    setError: setErrorPass,
+    formState: { errors: errorsPass, isSubmitting: isSubmittingPass },
+  } = useForm({
+    defaultValues: { oldPassword: "", newPassword: "", confirmPassword: "" },
+  });
     useEffect(() => {
 
-        reset(userdetails, {
+        resetName(userdetails, {
             keepDirtyValues: true,
         });
 
@@ -29,7 +46,7 @@ const ProfileComponent = ({ userdetails }) => {
         }
     }
     const changePassword = async (formData) => {
-        try {
+            try {
             const { data } = await axios.post("http://localhost:4000/api/changepassword", { oldPassword: formData.oldPassword, newPassword: formData.newPassword }, { withCredentials: true });
             if (data.success) {
                 toast.success(data.message);
@@ -45,17 +62,17 @@ const ProfileComponent = ({ userdetails }) => {
 
     return (
         <div className='profile-component'>
-            <div className='d-flex justify-content-start align-items-center gap-2'>
+            <div className='d-flex justify-content-start align-items-center gap-2 mb-5'>
                 <img src="https://cdn-icons-png.flaticon.com/128/2956/2956788.png" alt="" height={30} width={30} />
                 <span className='fs-3 mb-1'>Profile Settings</span>
             </div>
             <Container>
-                <Row>
+                <Row className='d-flex flex-column gap-5'>
                     <Col xs='6'>
                         <h5>Edit Name</h5>
-                        <form action="" onSubmit={handleSubmit(changeUsername)}>
+                        <form  onSubmit={handleSubmitName(changeUsername)}>
                             <input type="text" name="" id=""
-                                {...register("name",
+                                {...registerName("name",
                                     {
                                         required: { value: true, message: "enter your name" },
                                         maxLength: { value: 30, message: "maximun length is 30" },
@@ -65,16 +82,17 @@ const ProfileComponent = ({ userdetails }) => {
                                         }
                                     })
                                 } />
-                            {errors.name && <p className='text-danger'>&#9432; {errors.name.message}</p>}
-                            <input type="submit" value='Save' className='btn btn-success' disabled={isSubmitting} />
+                            {errorsName.name && <p className='text-danger'>&#9432; {errorsName.name.message}</p>}
+                            <br />
+                            <input type="submit" value='Save' className='btn btn-success mt-1' disabled={isSubmittingName} />
                         </form>
                     </Col>
                     <Col xs='6'>
-                        <h5>Edit Name</h5>
-                        <form action="" onSubmit={handleSubmit(changePassword)}>
-                            <label htmlFor="oldPassword">Old Password</label>
+                        <h5>Edit Password</h5>
+                        <form  onSubmit={handleSubmitPass(changePassword)}>
+                            <label htmlFor="oldPassword">Old Password</label> &nbsp;
                             <input className='' type="password" name="" id="oldPassword"
-                                {...register("oldPassword",
+                                {...registerPass("oldPassword",
                                     {
                                         required: { value: true, message: "enter password" },
                                         pattern: {
@@ -85,11 +103,11 @@ const ProfileComponent = ({ userdetails }) => {
                                         maxLength: { value: 15, message: "must contain less than 15 characters" }
                                     })
                                 } />
-                            {errors.oldPassword && <p className='text-danger'>&#9432; {errors.oldPassword.message}</p>}
+                            {errorsPass.oldPassword && <p className='text-danger'>&#9432; {errorsPass.oldPassword.message}</p>}
                             <br />
-                            <label htmlFor="newPassword">New Password</label>
+                            <label htmlFor="newPassword">New Password</label>&nbsp;
                             <input className='' type="password" name="" id="newPassword"
-                                {...register("newPassword",
+                                {...registerPass("newPassword",
                                     {
                                         required: { value: true, message: "enter password" },
                                         pattern: {
@@ -100,8 +118,9 @@ const ProfileComponent = ({ userdetails }) => {
                                         maxLength: { value: 15, message: "must contain less than 15 characters" }
                                     })
                                 } />
-                            {errors.newPassword && <p className='text-danger'>&#9432; {errors.newPassword.message}</p>}
-                            <input type="submit" value='Save' className='btn btn-success' disabled={isSubmitting} />
+                            {errorsPass.newPassword && <p className='text-danger'>&#9432; {errorsPass.newPassword.message}</p>}
+                            <br />
+                            <input type="submit" value='Save' className='btn btn-success' disabled={isSubmittingPass} />
                         </form></Col>
                     <Col xs='6'></Col>
                 </Row>

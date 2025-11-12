@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './homecomponent.css'
 import axios from 'axios';
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 
 const HomeComponent = () => {
   axios.defaults.withCredentials = true;
+  const navigate=useNavigate();
   const [habitData, sethabitData] = useState([]);
   const [dummy, setdummy] = useState()
   const { register, reset, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm();
@@ -45,6 +47,20 @@ const HomeComponent = () => {
     }
     }
   }
+  const markCompleted=async(name)=>{
+    try {
+      const {data}=await axios.patch('http://localhost:4000/api/updatetimestamp',{name},{ withCredentials: true });
+      if (data.success) { 
+        toast.success(data.message);
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      if(error){
+        console.log(error);
+      }
+    } 
+  }
   const getHabits = async () => {
     try {
       const { data } = await axios.get('http://localhost:4000/api/gethabits', { withCredentials: true });
@@ -61,8 +77,22 @@ const HomeComponent = () => {
       }
     }
   }
+  const checkIfCompletedToday = (date) => {
+    if (!date) return false;
+
+    const lastDate = new Date(date);
+    const now = new Date();
+
+    // Compare only the date parts, not the time
+    return (
+      lastDate.getFullYear() === now.getFullYear() &&
+      lastDate.getMonth() === now.getMonth() &&
+      lastDate.getDate() === now.getDate()
+    );
+  };
   useEffect(() => {
     getHabits();
+    
   })
 
   const getLastCompleted = (date) => {
@@ -92,6 +122,7 @@ const HomeComponent = () => {
   // completed is in the future (negative diff)
   return 'In the future';
 }; 
+
   return (
     <div className='home-component'>
       <h2 className='text-center fw-bold mb-3'>Build Better Habits One Step At a Time</h2>
@@ -121,8 +152,8 @@ const HomeComponent = () => {
                   <p>{getLastCompleted(habit.lastCompletedDate)}</p>
                 </div>
                 <div className='d-flex align-items-center gap-2'>
-                  <button className='btn btn-outline-success'>Mark as Completed</button>
-                  <button className='btn btn-success'>view activities</button>
+                  <button className='btn btn-outline-success' onClick={()=>markCompleted(habit.name)} disabled={checkIfCompletedToday(habit.lastCompletedDate)}>{checkIfCompletedToday(habit.lastCompletedDate)?'Completed':'Mark as Completed'}</button>
+                  <button className='btn btn-success' onClick={()=>navigate(`/activities/${encodeURIComponent(habit.name)}`)}>View activities</button>
                   <button className='bg-transparent border-0' onClick={()=>deletehabit(habit.name)}><img src="https://cdn-icons-png.flaticon.com/128/10336/10336279.png" alt="" width={25} height={25}/></button>
                 </div>
               </Col>

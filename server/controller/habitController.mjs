@@ -39,7 +39,7 @@ export const getHabits = async (req, res) => {
 
   
 
-export const updtaeCompletedTimeStamp=async (req,res)=>{
+export const updateCompletedTimeStamp=async (req,res)=>{
     const {name}=req.body;
     if (!name || typeof name !== 'string') {
         return res.status(404).json({ status: false, message: "not valid habit" });
@@ -77,6 +77,27 @@ export const deletehabit=async(req,res)=>{
         }else{
             return res.status(404).json({ status: false, message: "habit not found" });
         }
+    } catch (error) {
+        return res.status(500).json({ status: false, message: error.message });
+    }
+}
+
+export const getTimeStamps=async (req,res)=>{
+    const {name}=req.query;
+    if (!name || typeof name !== 'string') {
+        return res.status(404).json({ status: false, message: "not valid habit" });
+    }
+    const {id}=req;
+    if ( !id) {
+        return res.status(404).json({ status: false, message: "please enter valid id" });
+    }
+    try {
+       const timeStamp=await HabitModel.findOne({name,user:id}).select('completionTimeStamps');
+        
+        if(!timeStamp){
+            return res.status(404).json({ status: false, message: "not valid habit" });
+        }
+    return res.status(200).json({ success: true,timeStamp});
     } catch (error) {
         return res.status(500).json({ status: false, message: error.message });
     }

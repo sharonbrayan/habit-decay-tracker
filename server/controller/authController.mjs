@@ -105,13 +105,13 @@ export const changePassword = async (req, res) => {
         const newHashedPassword = await bcrypt.hash(newPassword, salt);
         user.password = newHashedPassword;
         await user.save();
-        return res.json({ success: true });
+        return res.json({ success: true , message:'password changed successfully'});
     } catch (error) {
         return res.json({ success: false, message: error.message });
     }
 }
 
-export const changeUsername = async (req, res) => {
+export const changeUsername = async (req, res)  => {
     const { newName } = req.body;
     const { id } = req;
     if (!newName || typeof newName !== 'string') {
