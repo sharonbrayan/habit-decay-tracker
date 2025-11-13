@@ -4,6 +4,7 @@
     background-color: #ffffff;
     border: 2px solid honeydew;
     border-radius: 10px;
+  
  }
 .profile{
    cursor: pointer;
@@ -70,3 +71,9 @@
     width: 45px;
     border-radius: 50%;
  }
+ @media (max-width:767px) {
+    .sidenav{
+       /*  width: 80vw;
+        position: relative; */
+    }
+}

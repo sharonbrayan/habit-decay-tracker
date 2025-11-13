@@ -17,3 +17,9 @@ input::placeholder{
 .contents{
     height: 40vh;
 }
+@media (max-width:767px) {
+    /* .home-component{
+        position: absolute;
+        top: 0;
+    } */
+}

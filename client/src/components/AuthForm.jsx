@@ -11,7 +11,7 @@ const AuthForm = ({ auth }) => {
   const onsubmit = async (formData) => {
     if (auth === 'signup') {
       try {
-        const { data } = await axios.post("http://localhost:4000/api/register", formData,{withCredentials:true});
+        const { data } = await axios.post("http://192.168.13.233:4000/api/register", formData,{withCredentials:true});
         if (data.success) {
           toast.success(data.message);
           navigate('/home')
@@ -27,7 +27,7 @@ const AuthForm = ({ auth }) => {
       }
     } else if (auth === 'login') {
       try {
-        const { data } = await axios.post("http://localhost:4000/api/login", formData,{withCredentials:true});
+        const { data } = await axios.post("http://192.168.13.233:4000/api/login", formData,{withCredentials:true});
         if (data.success) {
           toast.success(data.message);
           navigate('/home')

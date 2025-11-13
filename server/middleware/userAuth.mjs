@@ -8,7 +8,7 @@ export const userAuth=async(req,res,next)=>{
             req.id=decodeToken.id;
         }else{
             return res.json({ success: false, message: "Unautherised" })
-        }
+        } 
         next();
     } catch (error) {
         return res.json({ success: false, message: error.message});

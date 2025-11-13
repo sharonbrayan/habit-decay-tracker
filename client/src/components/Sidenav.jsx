@@ -2,7 +2,9 @@ import React from 'react'
 import './sidenav.css'
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 const Sidenav = ({ userdetails }) => {
+  const [close, setclose] = useState(true);
   const location = useLocation();
   const pathName=location.pathname;
   const navigate=useNavigate();
@@ -23,9 +25,6 @@ const Sidenav = ({ userdetails }) => {
           <Link to={'/points'} className='text-decoration-none text-black'><i className="fa fa-trophy" aria-hidden="true"></i> Points</Link>
         </li>
       </ul>
-      <div className='close-btn d-flex justify-content-center align-items-center bg-body-secondary'>
-        <img src="https://cdn-icons-png.flaticon.com/128/13589/13589081.png" alt="" height={45} width={45} />
-      </div>
     </div>
   )
 }

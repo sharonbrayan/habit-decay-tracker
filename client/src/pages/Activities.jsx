@@ -26,7 +26,7 @@ export default function Activities() {
 
   const getTimeStamps = async () => {
     try {
-      const { data } = await axios.get('http://localhost:4000/api/gettimestamps/', {
+      const { data } = await axios.get('http://192.168.13.233:4000/api/gettimestamps/', {
         params: { name },
         withCredentials: true,
       })

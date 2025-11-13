@@ -15,7 +15,7 @@ const HomeComponent = () => {
 
   const onsubmit = async (name) => {
     try {
-      const { data } = await axios.post('http://localhost:4000/api/addhabit', name, { withCredentials: true });
+      const { data } = await axios.post('http://192.168.13.233:4000/api/addhabit', name, { withCredentials: true });
       if (data.success) {
         toast.success(data.message);
       } else {
@@ -34,7 +34,7 @@ const HomeComponent = () => {
     const confirm=window.confirm("Are you sure to delete this?");
     if(confirm){
       try {
-      const {data}=await axios.delete('http://localhost:4000/api/deletehabit',{ data: { name }, withCredentials: true });
+      const {data}=await axios.delete('http://192.168.13.233:4000/api/deletehabit',{ data: { name }, withCredentials: true });
       if (data.success) {
         toast.success(data.message);
       } else {
@@ -49,7 +49,7 @@ const HomeComponent = () => {
   }
   const markCompleted=async(name)=>{
     try {
-      const {data}=await axios.patch('http://localhost:4000/api/updatetimestamp',{name},{ withCredentials: true });
+      const {data}=await axios.patch('http://192.168.13.233:4000/api/updatetimestamp',{name},{ withCredentials: true });
       if (data.success) { 
         toast.success(data.message);
       } else {
@@ -63,7 +63,7 @@ const HomeComponent = () => {
   }
   const getHabits = async () => {
     try {
-      const { data } = await axios.get('http://localhost:4000/api/gethabits', { withCredentials: true });
+      const { data } = await axios.get('http://192.168.13.233:4000/api/gethabits', { withCredentials: true });
       if (data.success) {
         sethabitData(data.habits);
       } else {
@@ -125,7 +125,7 @@ const HomeComponent = () => {
 
   return (
     <div className='home-component'>
-      <h2 className='text-center fw-bold mb-3'>Build Better Habits One Step At a Time</h2>
+      <h2 className='text-center fw-bold mb-5 mb-md-3'>Build Better Habits One Step At a Time</h2>
       <form action="" onSubmit={handleSubmit(onsubmit)} className='d-flex flex-column w-50 border border-1 py-2 px-3 mb-4'>
         <label htmlFor="name" className='fw-semibold fs-4 pb-2'>Add a New Habit</label>
         <div className='w-100 d-flex justify-content-between'>
@@ -142,7 +142,7 @@ const HomeComponent = () => {
         </div>
       </form>
       <h3 className='mb-5'>Your Habits And Activities</h3>
-      <Container className='overflow-y-scroll contents'>
+      <Container fluid className='overflow-y-scroll contents'>
         <Row>
           {
             habitData.length>=1?habitData.map((habit) =>  (

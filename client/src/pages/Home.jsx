@@ -14,8 +14,8 @@ const Home = () => {
             <Navbar showlogout={true}/>
             <Container fluid>
                 <Row>
-                    <Col xl={3} md={12} className='ps-0'><Sidenav userdetails={userDetails}/></Col>
-                    <Col xs={9}><HomeComponent/></Col>
+                    <Col md={3}  xs={12} className='ps-0'><Sidenav userdetails={userDetails}/></Col>
+                    <Col md={9} xs={12}><HomeComponent/></Col>
                 </Row>
             </Container>
         </div>

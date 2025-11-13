@@ -2,7 +2,7 @@ import { userModel } from "../model/usermodel.mjs";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken"
 
-
+ 
 export const register = async (req, res) => {
     const { name, password } = req.body;
     if (!name || !password || typeof name !== 'string' || typeof password !== 'string') {
