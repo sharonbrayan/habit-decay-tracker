@@ -6,3 +6,9 @@
     padding: 5%;
     background-color: #ffffff;
 }
+ @media (max-width:768px) {
+   .activities{
+     position: absolute;
+   }
+ }
+ 

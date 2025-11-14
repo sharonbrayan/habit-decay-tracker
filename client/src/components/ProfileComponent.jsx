@@ -62,16 +62,16 @@ const ProfileComponent = ({ userdetails }) => {
 
     return (
         <div className='profile-component'>
-            <div className='d-flex justify-content-start align-items-center gap-2 mb-5'>
+            <div className='d-flex justify-content-start align-items-center gap-2 mb-5 mb-md-3'>
                 <img src="https://cdn-icons-png.flaticon.com/128/2956/2956788.png" alt="" height={30} width={30} />
                 <span className='fs-3 mb-1'>Profile Settings</span>
             </div>
             <Container>
                 <Row className='d-flex flex-column gap-5'>
-                    <Col xs='6'>
+                    <Col xs='12' md={6}>
                         <h5>Edit Name</h5>
-                        <form  onSubmit={handleSubmitName(changeUsername)}>
-                            <input type="text" name="" id=""
+                        <form  onSubmit={handleSubmitName(changeUsername)} className='d-flex flex-column gap-2'>
+                            <input type="text" name="" id="" className='w-100'
                                 {...registerName("name",
                                     {
                                         required: { value: true, message: "enter your name" },
@@ -83,14 +83,13 @@ const ProfileComponent = ({ userdetails }) => {
                                     })
                                 } />
                             {errorsName.name && <p className='text-danger'>&#9432; {errorsName.name.message}</p>}
-                            <br />
                             <input type="submit" value='Save' className='btn btn-success mt-1' disabled={isSubmittingName} />
                         </form>
                     </Col>
-                    <Col xs='6'>
+                    <Col  xs='12' md={6}>
                         <h5>Edit Password</h5>
-                        <form  onSubmit={handleSubmitPass(changePassword)}>
-                            <label htmlFor="oldPassword">Old Password</label> &nbsp;
+                        <form  onSubmit={handleSubmitPass(changePassword)}  className='d-flex flex-column gap-2'>
+                            <label htmlFor="oldPassword">Old Password</label>
                             <input className='' type="password" name="" id="oldPassword"
                                 {...registerPass("oldPassword",
                                     {
@@ -104,8 +103,7 @@ const ProfileComponent = ({ userdetails }) => {
                                     })
                                 } />
                             {errorsPass.oldPassword && <p className='text-danger'>&#9432; {errorsPass.oldPassword.message}</p>}
-                            <br />
-                            <label htmlFor="newPassword">New Password</label>&nbsp;
+                            <label htmlFor="newPassword">New Password</label>
                             <input className='' type="password" name="" id="newPassword"
                                 {...registerPass("newPassword",
                                     {
@@ -119,7 +117,6 @@ const ProfileComponent = ({ userdetails }) => {
                                     })
                                 } />
                             {errorsPass.newPassword && <p className='text-danger'>&#9432; {errorsPass.newPassword.message}</p>}
-                            <br />
                             <input type="submit" value='Save' className='btn btn-success' disabled={isSubmittingPass} />
                         </form></Col>
                     <Col xs='6'></Col>

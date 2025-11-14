@@ -7,6 +7,7 @@
     padding: 5%;
     background-color: #ffffff;
 }
+
 input[type="text"]{
     width: 75%;
 }
@@ -17,9 +18,11 @@ input::placeholder{
 .contents{
     height: 40vh;
 }
+.input-form{
+width: 60%;
+}
 @media (max-width:767px) {
-    /* .home-component{
-        position: absolute;
-        top: 0;
-    } */
+    .input-form{
+        width: 100%;
+    }
 }

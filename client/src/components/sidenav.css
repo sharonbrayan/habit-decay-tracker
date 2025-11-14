@@ -71,9 +71,15 @@
     width: 45px;
     border-radius: 50%;
  }
- @media (max-width:767px) {
-    .sidenav{
-       /*  width: 80vw;
-        position: relative; */
-    }
+@media (min-width: 768px) {
+  #sidebar {
+    z-index: 0 !important; /* or lower if needed */
+  }
 }
+
+@media (max-width: 767px) {
+  #sidebar {
+    z-index: 3 !important;
+  }
+}
+

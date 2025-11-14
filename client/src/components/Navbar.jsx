@@ -29,8 +29,8 @@ const Navbar = ({ showlogout }) => {
       <Container fluid className='pt-3 px-lg-5 px-3 '>
         <Row className='d-flex justify-content-end'>
           <Col className='d-flex align-items-center gap-2' style={{ cursor: "pointer" }}>
-            <img src={logo} alt="" height={50} width={50} onClick={() => navigate('/')} />
-            <h3 onClick={() => navigate('/')}>HabitHorizon</h3>
+            <img src={logo} alt="" height={50} width={50}/>
+            <h3>HabitHorizon</h3>
           </Col>
           {showAuthButtons ?
             <Col className='d-flex gap-3 align-items-center justify-content-end'>

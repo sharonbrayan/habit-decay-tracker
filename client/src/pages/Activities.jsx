@@ -115,19 +115,19 @@ export default function Activities() {
       <Navbar showlogout={true} />
       <Container fluid>
         <Row className="content-row">
-          <Col xl={3} md={12} className="ps-0">
+          <Col xs={12} md={3} className="ps-0" id='sidebar'>
             <Sidenav userdetails={userDetails} />
           </Col>
 
-          <Col xl={9} md={12} className='activities'>
+          <Col xs={12} md={9} className='activities'>
             <div className="d-flex gap-3 align-items-center activities-hero">
               <div style={{ flex: 1 }}>
-                <h3>Activities — {decodeURIComponent(name || '')}</h3>
+                <h3 className='text-capitalize'>Activities — {decodeURIComponent(name || '')}</h3>
                 <p>Track completions and see how your streak and weekly progress look.</p>
               </div>
             </div>
 
-            <div className="d-flex gap-3">
+            <div className="d-md-flex gap-3">
               {/* Left: table */}
               <div style={{ flex: 2 }} className="activities-card">
                 <h5 style={{ marginBottom: 8 }}>Completion History</h5>
