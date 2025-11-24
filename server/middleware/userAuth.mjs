@@ -1,16 +1,37 @@
 import jwt from "jsonwebtoken";
 
-export const userAuth=async(req,res,next)=>{
-    const {token}=req.cookies;
-    try {
-        const decodeToken=jwt.verify(token,'secret');
-        if(decodeToken.id){
-            req.id=decodeToken.id;
-        }else{
-            return res.json({ success: false, message: "Unautherised" })
-        } 
-        next();
-    } catch (error) {
-        return res.json({ success: false, message: error.message});
+export const userAuth = (req, res, next) => {
+if (
+    req.path.includes("vite") ||
+    req.path.includes("@react-refresh") ||
+    req.path.includes("favicon") ||
+    req.method === "OPTIONS"
+  ) {
+    return next();
+  }
+
+  const token = req.cookies?.token;
+
+  if (!token) {
+    return res
+      .status(401) 
+      .json({ success: false, message: "No token provided in cookies" });
+  }
+
+  try { 
+    const decoded = jwt.verify(token, "secret"); // same secret as register
+
+    if (!decoded?.id) {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid token payload" });
     }
-} 
+
+    req.id = decoded.id;
+    next(); 
+  } catch (error) {
+    return res 
+      .status(401)
+      .json({ success: false, message: error.message });
+  }
+};

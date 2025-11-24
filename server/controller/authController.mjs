@@ -22,14 +22,14 @@ export const register = async (req, res) => {
             httpOnly: true,
             sameSite: 'lax',
             maxAge: 1000 * 60 * 60 * 24 * 7,
-            secure: false
+            secure: false,
+            path: '/'
         })
 
 
         return res.json({ success: true, message: "user registered successfully" });
 
     } catch (error) {
-        console.log(error);
         return res.status(404).json({ success: false, message: error.message });
     }
 }
@@ -54,7 +54,8 @@ export const login = async (req, res) => {
             httpOnly: true,
             sameSite: 'lax',
             maxAge: 1000 * 60 * 60 * 24 * 7,
-            secure: false
+            secure: false,
+            path: '/'
         })
         return res.json({ success: true, message: "Logged In" });
     } catch (error) {

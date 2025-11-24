@@ -71,7 +71,6 @@ export const deletehabit=async(req,res)=>{
     }
     try {
         const deletedItem=await HabitModel.deleteOne({name,user:id});
-        console.log(deletedItem);
         if(deletedItem){
             return res.json({success:true,message:'deleted successfully'});
         }else{
@@ -102,3 +101,42 @@ export const getTimeStamps=async (req,res)=>{
         return res.status(500).json({ status: false, message: error.message });
     }
 }
+
+
+export const getDecayScores = async (req, res) => {
+  try {
+    const userId = req.id;
+
+    const habits = await HabitModel.find({ user: userId });
+
+    const response = habits.map(habit => {
+      const last = habit.lastCompletedDate 
+        ? new Date(habit.lastCompletedDate) 
+        : null; 
+
+      const today = new Date();
+      const diffDays = last 
+        ? Math.floor((today - last) / (1000 * 60 * 60 * 24)) 
+        : null;
+
+      // Simple decay formula
+      // 0 days = 100 score
+      // 10 days = 0 score
+      let decayScore = last ? Math.max(0, 100 - diffDays * 10) : 0;
+
+      return {
+        habitId: habit._id,
+        name: habit.name,
+        lastCompleted: habit.lastCompletedDate || null,
+        daysSinceLastCompletion: diffDays ?? "never completed",
+        decayScore,
+        completionHistory: habit.completionTimeStamps
+      };
+    });
+
+    res.json({ success: true, decay: response });
+
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
