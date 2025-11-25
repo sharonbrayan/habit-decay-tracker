@@ -19,7 +19,7 @@ if (
   }
 
   try { 
-    const decoded = jwt.verify(token, "secret"); // same secret as register
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // same secret as register
 
     if (!decoded?.id) {
       return res

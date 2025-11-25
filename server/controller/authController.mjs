@@ -2,7 +2,7 @@ import { userModel } from "../model/usermodel.mjs";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken"
 
- 
+const isProduction = process.env.NODE_ENV === "production";
 export const register = async (req, res) => {
     const { name, password } = req.body;
     if (!name || !password || typeof name !== 'string' || typeof password !== 'string') {
@@ -17,13 +17,13 @@ export const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
         const user = await new userModel({ name, password: hashedPassword });
         await user.save();
-        const token = jwt.sign({ id: user._id }, "secret", { expiresIn: '7d' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
         res.cookie('token', token, {
             httpOnly: true,
-            sameSite: 'lax',
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-            secure: false,
-            path: '/'
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            path: "/"
         })
 
 
@@ -49,13 +49,13 @@ export const login = async (req, res) => {
             return res.json({ success: false, message: "password doesn't match" });
         }
 
-        const token = jwt.sign({ id: user._id }, "secret", { expiresIn: '7d' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
         res.cookie('token', token, {
             httpOnly: true,
-            sameSite: 'lax',
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-            secure: false,
-            path: '/'
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            path: "/"
         })
         return res.json({ success: true, message: "Logged In" });
     } catch (error) {
@@ -77,9 +77,10 @@ export const logout = async (req, res) => {
     try {
         res.clearCookie('token', {
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
-        })
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+            path: "/"
+        });
         return res.json({ success: true, message: "logged out successfully" })
     } catch (error) {
         return res.json({ success: false, message: error.message });
@@ -106,13 +107,13 @@ export const changePassword = async (req, res) => {
         const newHashedPassword = await bcrypt.hash(newPassword, salt);
         user.password = newHashedPassword;
         await user.save();
-        return res.json({ success: true , message:'password changed successfully'});
+        return res.json({ success: true, message: 'password changed successfully' });
     } catch (error) {
         return res.json({ success: false, message: error.message });
     }
 }
 
-export const changeUsername = async (req, res)  => {
+export const changeUsername = async (req, res) => {
     const { newName } = req.body;
     const { id } = req;
     if (!newName || typeof newName !== 'string') {
