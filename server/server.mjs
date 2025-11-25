@@ -13,14 +13,14 @@ connectDb();
 
 app.use(express.json()); 
 app.use(cors({
-  origin: [ 
-    "https://habit-decay-tracker.onrender.com/",
-    process.env.CLIENT_URL,
-    'http://localhost:5173',
-    'http://192.168.13.233:5173'
+  origin: [
+    "https://habit-decay-tracker-1.onrender.com",
+    "http://localhost:5173",
+    "http://192.168.13.233:5173"
   ],
   credentials: true
 }));
+
 app.use(cookieParser())
 
 

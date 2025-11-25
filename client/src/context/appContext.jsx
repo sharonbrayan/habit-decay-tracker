@@ -8,7 +8,7 @@ export const AppContextProvider=(props)=>{
     
         (async () => {
             try {
-                const { data } = await axios.get('http://192.168.13.233:4000/api/userdata',{withCredentials:true});
+                const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/userdata`,{withCredentials:true});
                 if (data.success) {
                      setuserDetails(data.user);
                 } else {
