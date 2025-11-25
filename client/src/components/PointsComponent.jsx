@@ -23,7 +23,7 @@ const PointsComponent = () => {
     (async () => {
       try {
         const { data } = await axios.get(
-          "http://192.168.13.233:4000/api/decay-score",
+          `${import.meta.env.VITE_API_URL}/api/decay-score`,
           { withCredentials: true }
         );
 

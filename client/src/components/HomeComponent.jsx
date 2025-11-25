@@ -15,7 +15,7 @@ const HomeComponent = () => {
 
   const onsubmit = async (name) => {
     try {
-      const { data } = await axios.post('http://192.168.13.233:4000/api/addhabit', name, { withCredentials: true });
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/addhabit`, name, { withCredentials: true });
       if (data.success) {
         toast.success(data.message);
       } else {
@@ -34,7 +34,7 @@ const HomeComponent = () => {
     const confirm = window.confirm("Are you sure to delete this?");
     if (confirm) {
       try {
-        const { data } = await axios.delete('http://192.168.13.233:4000/api/deletehabit', { data: { name }, withCredentials: true });
+        const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/api/deletehabit`, { data: { name }, withCredentials: true });
         if (data.success) {
           toast.success(data.message);
         } else {
@@ -49,7 +49,7 @@ const HomeComponent = () => {
   }
   const markCompleted = async (name) => {
     try {
-      const { data } = await axios.patch('http://192.168.13.233:4000/api/updatetimestamp', { name }, { withCredentials: true });
+      const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/api/updatetimestamp`, { name }, { withCredentials: true });
       if (data.success) {
         toast.success(data.message);
       } else {
@@ -63,7 +63,7 @@ const HomeComponent = () => {
   }
   const getHabits = async () => {
     try {
-      const { data } = await axios.get('http://192.168.13.233:4000/api/gethabits', { withCredentials: true });
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/gethabits`, { withCredentials: true });
       if (data.success) {
         sethabitData(data.habits);
       } else {

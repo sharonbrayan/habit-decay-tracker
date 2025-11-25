@@ -11,7 +11,7 @@ const Navbar = ({ showlogout }) => {
   const navigate = useNavigate();
   const logout = async () => { 
     try {
-      const {data}=await axios.post('http://192.168.13.233:4000/api/logout',{withCredentials:true});
+      const {data}=await axios.post(`${import.meta.env.VITE_API_URL}/api/logout`,{withCredentials:true});
       if(data.success){
         toast.success(data.message);
         navigate('/');

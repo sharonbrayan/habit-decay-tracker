@@ -33,7 +33,7 @@ const ProfileComponent = ({ userdetails }) => {
     }, [userdetails]);
     const changeUsername = async (formData) => {
         try {
-            const { data } = await axios.post("http://192.168.13.233:4000/api/changeusername", { newName: formData.name }, { withCredentials: true });
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/changeusername`, { newName: formData.name }, { withCredentials: true });
             if (data.success) {
                 toast.success(data.message);
             } else {
@@ -47,7 +47,7 @@ const ProfileComponent = ({ userdetails }) => {
     }
     const changePassword = async (formData) => {
             try {
-            const { data } = await axios.post("http://192.168.13.233:4000/api/changepassword", { oldPassword: formData.oldPassword, newPassword: formData.newPassword }, { withCredentials: true });
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/changepassword`, { oldPassword: formData.oldPassword, newPassword: formData.newPassword }, { withCredentials: true });
             if (data.success) {
                 toast.success(data.message);
             } else {
