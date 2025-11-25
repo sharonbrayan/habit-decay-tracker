@@ -14,6 +14,7 @@ connectDb();
 app.use(express.json()); 
 app.use(cors({
   origin: [ 
+    "https://habit-decay-tracker.onrender.com/",
     process.env.CLIENT_URL,
     'http://localhost:5173',
     'http://192.168.13.233:5173'
@@ -26,7 +27,7 @@ app.use(cookieParser())
 app.use('/api',habitRouter);  
 app.use('/api',authRouter);
 app.get('/',(req,res)=>{
-    res.send('hello');
+    res.send('hello world');
 })
 app.listen(process.env.PORT,'0.0.0.0',()=>{
     console.log(`server is running on port ${process.env.PORT}`);
