@@ -109,27 +109,59 @@ export const getDecayScores = async (req, res) => {
 
     const habits = await HabitModel.find({ user: userId });
 
-    const response = habits.map(habit => {
-      const last = habit.lastCompletedDate 
-        ? new Date(habit.lastCompletedDate) 
-        : null; 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-      const today = new Date();
-      const diffDays = last 
-        ? Math.floor((today - last) / (1000 * 60 * 60 * 24)) 
+    const response = habits.map(habit => {
+      let score = 100; // starting score
+      const history = habit.completionTimeStamps || [];
+
+      // Convert array of timestamps -> Set of date strings ("YYYY-MM-DD")
+      const completionDates = new Set(
+        history.map(ts => new Date(ts).toISOString().split("T")[0])
+      );
+
+      const createdAt = new Date(habit.createdAt);
+      createdAt.setHours(0, 0, 0, 0);
+
+      // Simulate day-by-day scoring
+      let cursor = new Date(createdAt);
+
+      while (cursor <= today) {
+        const key = cursor.toISOString().split("T")[0];
+
+        if (completionDates.has(key)) {
+          // Habit completed on this day
+          score = score + (100 - score) * 0.1;
+        } else {
+          // Habit missed
+          score = score * 0.9;
+        }
+
+        // Floor to prevent score from becoming too small
+        score = Math.max(score, 5);
+
+        cursor.setDate(cursor.getDate() + 1);
+      }
+
+      // Round final score
+      score = Math.round(score);
+
+      // Days since last completion
+      let last = habit.lastCompletedDate
+        ? new Date(habit.lastCompletedDate)
         : null;
 
-      // Simple decay formula
-      // 0 days = 100 score
-      // 10 days = 0 score
-      let decayScore = last ? Math.max(0, 100 - diffDays * 10) : 0;
+      let diffDays = last
+        ? Math.floor((today - last) / (1000 * 60 * 60 * 24))
+        : null;
 
       return {
         habitId: habit._id,
         name: habit.name,
         lastCompleted: habit.lastCompletedDate || null,
         daysSinceLastCompletion: diffDays ?? "never completed",
-        decayScore,
+        decayScore: score,
         completionHistory: habit.completionTimeStamps
       };
     });

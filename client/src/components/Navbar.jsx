@@ -16,7 +16,7 @@ const Navbar = ({ showlogout }) => {
         toast.success(data.message);
         navigate('/');
       }else{
-        toast.error(data.message);
+        console.log(data.message);
       }
     } catch (error) {
       
