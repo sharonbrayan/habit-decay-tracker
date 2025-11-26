@@ -14,7 +14,7 @@ connectDb();
 app.use(express.json()); 
 app.use(cors({
   origin: [
-    "https://habit-decay-tracker-1.onrender.com",
+    process.env.CLIENT_URL,
     "http://localhost:5173",
     "http://192.168.13.233:5173"
   ],
